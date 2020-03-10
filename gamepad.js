@@ -48,7 +48,7 @@ function checkGamepadButtons(){
 		primaryXaxisChanged = true;
 	}
 	else if(primaryXaxis > 0.35 && !primaryXaxisChanged){ //primary joystick right (forward video pased on xaxis)
-		video.currentTime += primaryXaxis * 1.3;
+		video.playbackRate = primaryXaxis * 5;
 		video.play();
 		primaryXaxisChanged = true;
 	}
@@ -80,7 +80,7 @@ function checkGamepadButtons(){
 		secondaryXaxisChanged = true;
 	}
 	else if(secondaryXaxis > 0.35 && !secondaryXaxisChanged){ //primary joystick right (forward video pased on xaxis)
-		video.currentTime += secondaryXaxis * 1.3;
+		video.playbackRate = secondaryXaxis * 5;
 		video.play();
 		secondaryXaxisChanged = true;
 	}
@@ -120,7 +120,7 @@ function checkGamepadButtons(){
 		} else if (video.msRequestFullscreen) { 
 		  video.msRequestFullscreen();
 		}
-		
+		videoFullscreen = true;
 		}
 		else{
 			if (document.exitFullscreen) {
@@ -132,6 +132,7 @@ function checkGamepadButtons(){
 			  } else if (document.msExitFullscreen) { /* IE/Edge */
 				document.msExitFullscreen();
 			  }
+			  videoFullscreen = false;
 		}
 		button2Pressed = true;
 	}
@@ -140,7 +141,7 @@ function checkGamepadButtons(){
 	}
 	if(gamePad.buttons[3].pressed && !button3Pressed ){//Y button pressed (eventually show list of tags)
 		console.log("y button pressed");
-		button7Pressed = true;
+		button3Pressed = true;
 	}
 	else  if(!gamePad.buttons[3].pressed){
 		button3Pressed = false;
@@ -201,7 +202,7 @@ window.addEventListener("gamepadconnected", function(e){
 console.log(e);
 setTimeout(function(){
 gamePadChecker = setInterval(checkGamepadButtons,100);
-},200);
+},350);
 });
 window.addEventListener("gamepaddisconnected", function(e){
 console.log("gamepaddisconnected");
